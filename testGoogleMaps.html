@@ -15,12 +15,24 @@
 
     <script>
 
+      var ufoSighting = {
 
+          caseNumber: 0,                // id of the sighting*
+          sightDate: "01/01/1970",     
+          sightTime: "01:01",           // date of when the sighting was observed
+          posted: "01/01/1970",         // date of when the sighting was submitted
+          city: "san diego",        // the city where the sighting was observed
+          state: "california",         // the state where the sighting was observed
+          shape: "",                 // shape of the sighting
+          duration: 0,    // the amount of time in milliseconds that the sighting lasted
+          summary: ""
+
+      };
 
       function initMap() {
 
           var geocoder = new google.maps.Geocoder();
-          var address = "california";
+          var address = ufoSighting.city;
 
           geocoder.geocode( { 'address': address}, function(results, status) {
 
