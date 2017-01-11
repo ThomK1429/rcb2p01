@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+
+
+    <script>
+
+      var ufoSighting = {
+
+          caseNumber: 0,                // id of the sighting*
+          sightDate: "01/01/1970",     
+          sightTime: "01:01",           // date of when the sighting was observed
+          posted: "01/01/1970",         // date of when the sighting was submitted
+          city: "san diego",        // the city where the sighting was observed
+          state: "california",         // the state where the sighting was observed
+          shape: "",                 // shape of the sighting
+          duration: 0,    // the amount of time in milliseconds that the sighting lasted
+          summary: ""
+
+      };
+
+      function initMap() {
+
+          var geocoder = new google.maps.Geocoder();
+          var address = ufoSighting.city;
+
+          geocoder.geocode( { 'address': address}, function(results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+              var latitude = results[0].geometry.location.lat();
+              var longitude = results[0].geometry.location.lng();
+              alert(latitude);
+              alert(longitude);
+
+              //var uluru = {lat: -25.363, lng: 131.044}; // somewhere else
+              //var uluru = {lat:   40.4976 , lng: 7845}; // somerset
+              var uluru = {lat:   latitude , lng: longitude};
+              //40.4976° N, 74.4885° W
+              var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: uluru
+              });
+              var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+              });
+               uluru = {lat:   40.4976 , lng: 7845}; 
+              var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+              });
+
+            } 
+
+
+          });
+
+
+      }
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQ5VBR5Q0UKAzskubcs-7_-ycClwCFqak&callback=initMap">
+   
+    </script>
+
+    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> -->
+
+
+
+
+  </body>
+</html>
