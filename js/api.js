@@ -21,19 +21,32 @@ request("https://mufoncms.com/cgi-bin/report_handler.pl?req=latest_reports", fun
       var $ = cheerio.load(html);
 
     // make an empty array for saving our scraped info
-    var result = [];
+    var result = [], header=[];
 
+    // with cheerio, look at  mufoncms site, 
+    // enclosed in "table" tags
+    //getting the column header 
+    // $("form[name=mufon_form] table tr").eq(1).each(function(i, element){
+    //     $(element).find('th').each(function(h, el){
+    //         header[h] =  $(el).text().trim().replace(/\n/g,'');
+    //     });
+    // });
+    //Column header console log
+    console.log("header", header);
     $("form[name=mufon_form] table tr").each(function(i, element){
   	/* Cheerio's find method will "find" the first matching child element in a parent.
   	 *    We start at the current element, then "find" td.
   	*/
-    var ufosightingList = [], rowDetails=[];
+    var ufosightingList = [], rowDetails=[], k=0;
     //adding th and td to an array
     $(element).find('td').each(function(j, ele){
         // var rowDetails =[];
         // rowDetails.push({th: header[k], td:  $(ele).text().replace(/\n/g,'')});
         rowDetails.push(  $(ele).text().replace(/\n/g,''));
-
+        // k +=1 ;
+        //rowDetails =JSON.stringify(rowDetails);
+       // ufosighting[j] = rowDetails; 
+      // ufosighting[j] =  $(ele).text().replace(/\n/g,'');
     });
     // Define JSON obj
     var ufosighting =  {
